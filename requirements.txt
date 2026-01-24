@@ -6,4 +6,5 @@ flake8
 black
 isort
 mypy
+httpx
 pytest
