@@ -19,6 +19,7 @@ def test_create_recipe(client):
     assert data["ingredients"] == payload["ingredients"]
     assert data["description"] == payload["description"]
 
+
 def test_list_recipes(client):
     client.post(
         "/recipes",
@@ -43,6 +44,7 @@ def test_list_recipes(client):
     assert "title" in recipe
     assert "cook_time_minutes" in recipe
     assert "views" in recipe
+
 
 def test_get_recipe_increments_views(client):
     create_resp = client.post(
