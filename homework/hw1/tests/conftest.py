@@ -3,7 +3,7 @@ from typing import Generator
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.orm import Session, sessionmaker
 
 from homework.hw1.database import Base
 from homework.hw1.main import app, get_db
