@@ -1,9 +1,9 @@
-from collections.abc import Generator
+from typing import Generator
 
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, Session
 
 from homework.hw1.database import Base
 from homework.hw1.main import app, get_db
@@ -26,7 +26,7 @@ def create_test_database() -> None:
 
 
 @pytest.fixture()
-def db() -> Generator:
+def db() -> Generator[Session, None, None]:
     session = TestingSessionLocal()
     try:
         yield session
@@ -35,8 +35,8 @@ def db() -> Generator:
 
 
 @pytest.fixture()
-def client(db) -> Generator:
-    def override_get_db():
+def client(db: Session) -> Generator[TestClient, None, None]:
+    def override_get_db() -> Generator[Session, None, None]:
         yield db
 
     app.dependency_overrides[get_db] = override_get_db
